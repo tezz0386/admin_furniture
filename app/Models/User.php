@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admin\Order;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,6 +24,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'contact_no',
+        'address',
     ];
 
     /**
@@ -53,6 +57,11 @@ class User extends Authenticatable
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
     }
 
 
